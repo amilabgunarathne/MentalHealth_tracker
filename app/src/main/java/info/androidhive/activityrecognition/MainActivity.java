@@ -17,6 +17,7 @@ import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -39,7 +40,8 @@ import java.util.List;
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity implements LocationListener {
-
+    CheckBox check1,check2,check3;
+    Button buttonSubmit;
     String imei;
     LocationManager locationManager;
     private static final int REQUEST_CODE = 101;
@@ -57,7 +59,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
 
     private TextView txtActivity, txtConfidence;
     private ImageView imgActivity;
-    private Button btnStartTrcking, btnStopTracking;
+    private Button btnStartTrcking, btnStopTracking, btnSurvay;
 
     private DatabaseReference myRef;
 
@@ -84,7 +86,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         imgActivity = findViewById(R.id.img_activity);
         btnStartTrcking = findViewById(R.id.btn_start_tracking);
         btnStopTracking = findViewById(R.id.btn_stop_tracking);
-
+           btnSurvay=findViewById(R.id.survay);
         myRef = FirebaseDatabase.getInstance().getReference("location").child(imei);
 
         Handler handler2 = new Handler();
@@ -116,6 +118,16 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
                 stopTracking();
             }
         });
+        btnSurvay.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                Intent intent1 = new Intent(MainActivity.this, WebViewActivity.class);
+                intent1.putExtra("IMEI", imei);
+                MainActivity.this.startActivity(intent1);
+            }
+        });
+
 
         broadcastReceiver = new BroadcastReceiver() {
             @Override
@@ -129,7 +141,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         };
 
         startTracking();
-
+        addListenerOnButtonClick();
     }
         @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String permissions[], @NonNull int[] grantResults) {
@@ -325,4 +337,38 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
 //
 //       // editTextAddress.setText(address);
 //    }
+public void addListenerOnButtonClick(){
+    //Getting instance of CheckBoxes and Button from the activty_main.xml file
+    check1=(CheckBox)findViewById(R.id.checkBox);
+    check2=(CheckBox)findViewById(R.id.checkBox2);
+    check3=(CheckBox)findViewById(R.id.checkBox3);
+    buttonSubmit=(Button)findViewById(R.id.button);
+
+    //Applying the Listener on the Button click
+    buttonSubmit.setOnClickListener(new View.OnClickListener(){
+
+        @Override
+        public void onClick(View view) {
+
+            StringBuilder result=new StringBuilder();
+            result.append("Selected options:");
+            if(check1.isChecked()){
+                result.append("\ndifficult to sleep");
+
+            }
+            if(check2.isChecked()){
+                result.append("\nEarly morning awakening");
+
+            }
+            if(check3.isChecked()){
+                result.append("\nAwakening time to time");
+
+            }
+
+            //Displaying the message on the toast
+            Toast.makeText(getApplicationContext(), result.toString(), Toast.LENGTH_LONG).show();
+        }
+
+    });
+}
 }

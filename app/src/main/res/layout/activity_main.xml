@@ -39,6 +39,7 @@
         />
 
     <LinearLayout
+        android:id="@+id/linear1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/yourLong"
@@ -48,7 +49,7 @@
         <ImageView
             android:id="@+id/img_activity"
             android:layout_width="wrap_content"
-            android:layout_height="200dp"
+            android:layout_height="50dp"
             android:tint="#606060" />
 
         <TextView
@@ -88,6 +89,65 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:text="Stop Tracking" />
+
+    <Button
+        android:id="@+id/survay"
+        android:layout_width="wrap_content"
+        android:layout_below="@+id/linear1"
+        android:layout_centerHorizontal="true"
+        android:layout_height="wrap_content"
+        android:text="Button" />
+    <TextView
+        android:id="@+id/txt_yesterday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/survay"
+        android:textColor="@color/colorPrimary"
+        android:textSize="14dp"
+        android:textStyle="bold"
+        android:text="Yesterday,"/>
+
+    <CheckBox
+        android:id="@+id/checkBox"
+        android:layout_below="@+id/txt_yesterday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="20dp"
+        android:text="I felt difficult to sleep"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <CheckBox
+        android:id="@+id/checkBox2"
+        android:layout_below="@+id/checkBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="20dp"
+        android:text="Early morning awakening without any reason"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/checkBox" />
+
+    <CheckBox
+        android:id="@+id/checkBox3"
+        android:layout_below="@+id/checkBox2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="20dp"
+        android:text="Awakening time to time(no continuous sleep) "
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/checkBox2" />
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:text="submit"
+        android:layout_below="@+id/checkBox3"
+         />
 
 
 </RelativeLayout>

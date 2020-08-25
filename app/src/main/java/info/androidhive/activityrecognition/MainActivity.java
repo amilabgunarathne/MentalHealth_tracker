@@ -12,11 +12,6 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Handler;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.content.LocalBroadcastManager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.telephony.TelephonyManager;
 import android.util.Log;
@@ -27,7 +22,17 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+
 import com.google.android.gms.location.DetectedActivity;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.io.IOException;
 import java.util.List;
@@ -54,6 +59,8 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
     private ImageView imgActivity;
     private Button btnStartTrcking, btnStopTracking;
 
+    private DatabaseReference myRef;
+
 
 
     @Override
@@ -78,6 +85,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         btnStartTrcking = findViewById(R.id.btn_start_tracking);
         btnStopTracking = findViewById(R.id.btn_stop_tracking);
 
+        myRef = FirebaseDatabase.getInstance().getReference("location").child(imei);
 
         Handler handler2 = new Handler();
         handler2.postDelayed(new Runnable() {
@@ -187,6 +195,23 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
             txtActivity.setText(label);
             txtConfidence.setText("Confidence: " + confidence);
             imgActivity.setImageResource(icon);
+            if(locationLatitude != null && locationLongitude != null){
+                info.androidhive.activityrecognition.Location location = new info.androidhive.activityrecognition.Location(locationLatitude,locationLongitude,label);
+                myRef.push().setValue(location).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if(task.isSuccessful()){
+
+                            Toast.makeText(MainActivity.this, "Location is updated", Toast.LENGTH_SHORT).show();
+                        }else {
+
+                            Toast.makeText(MainActivity.this, "Location is not updated", Toast.LENGTH_SHORT).show();
+
+                        }
+                    }
+                });
+
+            }
         }
     }
 

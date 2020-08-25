@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "884651624458",
+    "firebase_url": "https://mentalhack-84dee.firebaseio.com",
+    "project_id": "mentalhack-84dee",
+    "storage_bucket": "mentalhack-84dee.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:884651624458:android:b3d26d862b19426d5037f3",
+        "android_client_info": {
+          "package_name": "info.androidhive.activityrecognition"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "884651624458-akca13gbd2t48dh9s8ftqj4mt2cjhhim.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBcKMkmlUx1i761RQrvH3m0fns4WK3GePQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "884651624458-akca13gbd2t48dh9s8ftqj4mt2cjhhim.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

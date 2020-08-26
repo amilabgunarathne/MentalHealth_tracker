@@ -297,9 +297,11 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         mStatusChecker.run();
     }
 
+
     void stopRepeatingTask() {
         mHandler.removeCallbacks(mStatusChecker);
     }
+
     private void startTracking() {
         Intent intent = new Intent(MainActivity.this, BackgroundDetectedActivitiesService.class);
         startService(intent);
@@ -318,7 +320,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         Intent intent = new Intent(MainActivity.this, BackgroundDetectedActivitiesService.class);
         stopService(intent);
     }
-//    //reverse geocoding
+    //reverse geocoding
 //    private void LocationAddress() throws IOException {
 //        Log.d("add12345", "Value: " + locationLatitude);
 //        Geocoder geocoder;

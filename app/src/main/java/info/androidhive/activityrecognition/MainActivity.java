@@ -36,8 +36,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity implements LocationListener {
     CheckBox check1,check2,check3;
@@ -61,7 +63,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
     private ImageView imgActivity;
     private Button btnStartTrcking, btnStopTracking, btnSurvay;
 
-    private DatabaseReference myRef;
+    private DatabaseReference myRef,myRef1;
 
 
 
@@ -86,8 +88,11 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         imgActivity = findViewById(R.id.img_activity);
         btnStartTrcking = findViewById(R.id.btn_start_tracking);
         btnStopTracking = findViewById(R.id.btn_stop_tracking);
-           btnSurvay=findViewById(R.id.survay);
+        btnSurvay=findViewById(R.id.survay);
+        //buttonSubmit = findViewById(R.id.button);
+
         myRef = FirebaseDatabase.getInstance().getReference("location").child(imei);
+        myRef1 = FirebaseDatabase.getInstance().getReference("Question").child(imei);
 
         Handler handler2 = new Handler();
         handler2.postDelayed(new Runnable() {
@@ -111,6 +116,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
 //                MainActivity.this.startActivity(intent1);
                             }
         });
+
 
         btnStopTracking.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -207,7 +213,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
             txtActivity.setText(label);
             txtConfidence.setText("Confidence: " + confidence);
             imgActivity.setImageResource(icon);
-            if(locationLatitude != null && locationLongitude != null){
+            if(locationLatitude.length() > 0 && locationLongitude.length() > 0){
                 info.androidhive.activityrecognition.Location location = new info.androidhive.activityrecognition.Location(locationLatitude,locationLongitude,label);
                 myRef.push().setValue(location).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
@@ -347,6 +353,7 @@ public void addListenerOnButtonClick(){
     //Applying the Listener on the Button click
     buttonSubmit.setOnClickListener(new View.OnClickListener(){
 
+        String answers1,answers2,answers3;
         @Override
         public void onClick(View view) {
 
@@ -354,19 +361,44 @@ public void addListenerOnButtonClick(){
             result.append("Selected options:");
             if(check1.isChecked()){
                 result.append("\ndifficult to sleep");
-
+                answers1 = "Yes";
+            }else{
+                answers1 = "No";
             }
             if(check2.isChecked()){
                 result.append("\nEarly morning awakening");
-
+                answers2 = "Yes";
+            }else {
+                answers2 = "No";
             }
             if(check3.isChecked()){
                 result.append("\nAwakening time to time");
-
+                answers3 = "Yes";
+            }else {
+                answers3 = "No";
             }
+            Map<String, String> answers = new HashMap<>();
+            answers.put("difficult to sleep", answers1);
+            answers.put("Early morning awakening", answers2);
+            answers.put("Awakening time to time", answers3);
+            answers.put("Final Answer", result.toString());
+
+            myRef1.push().setValue(answers).addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    if(task.isSuccessful()){
+
+                        Toast.makeText(getApplicationContext(), "Answer is submitted", Toast.LENGTH_LONG).show();
+                    }else {
+
+                        Toast.makeText(MainActivity.this, "Answer is not submitted! Try Again", Toast.LENGTH_SHORT).show();
+
+                    }
+                }
+            });
 
             //Displaying the message on the toast
-            Toast.makeText(getApplicationContext(), result.toString(), Toast.LENGTH_LONG).show();
+
         }
 
     });

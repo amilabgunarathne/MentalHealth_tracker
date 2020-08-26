@@ -42,7 +42,7 @@ import java.util.Locale;
 import java.util.Map;
 
 public class MainActivity extends AppCompatActivity implements LocationListener {
-    CheckBox check1,check2,check3;
+    CheckBox check1,check2,check3,check4;
     Button buttonSubmit;
     String imei;
     LocationManager locationManager;
@@ -303,9 +303,11 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         mStatusChecker.run();
     }
 
+
     void stopRepeatingTask() {
         mHandler.removeCallbacks(mStatusChecker);
     }
+
     private void startTracking() {
         Intent intent = new Intent(MainActivity.this, BackgroundDetectedActivitiesService.class);
         startService(intent);
@@ -324,7 +326,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         Intent intent = new Intent(MainActivity.this, BackgroundDetectedActivitiesService.class);
         stopService(intent);
     }
-//    //reverse geocoding
+    //reverse geocoding
 //    private void LocationAddress() throws IOException {
 //        Log.d("add12345", "Value: " + locationLatitude);
 //        Geocoder geocoder;
@@ -348,12 +350,13 @@ public void addListenerOnButtonClick(){
     check1=(CheckBox)findViewById(R.id.checkBox);
     check2=(CheckBox)findViewById(R.id.checkBox2);
     check3=(CheckBox)findViewById(R.id.checkBox3);
+    check4=(CheckBox)findViewById(R.id.checkBox4);
     buttonSubmit=(Button)findViewById(R.id.button);
 
     //Applying the Listener on the Button click
     buttonSubmit.setOnClickListener(new View.OnClickListener(){
 
-        String answers1,answers2,answers3;
+        String answers1,answers2,answers3,answer4;
         @Override
         public void onClick(View view) {
 
@@ -377,10 +380,16 @@ public void addListenerOnButtonClick(){
             }else {
                 answers3 = "No";
             }
+            if((check4.isChecked())){
+                answer4 = "Yes";
+            }else {
+                answer4 = "No";
+            }
             Map<String, String> answers = new HashMap<>();
             answers.put("difficult to sleep", answers1);
             answers.put("Early morning awakening", answers2);
             answers.put("Awakening time to time", answers3);
+            answers.put("None of above", answer4);
             answers.put("Final Answer", result.toString());
 
             myRef1.push().setValue(answers).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -396,6 +405,7 @@ public void addListenerOnButtonClick(){
                     }
                 }
             });
+
 
             //Displaying the message on the toast
 

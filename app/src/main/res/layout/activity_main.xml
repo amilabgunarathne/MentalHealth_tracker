@@ -96,7 +96,7 @@
         android:layout_below="@+id/linear1"
         android:layout_centerHorizontal="true"
         android:layout_height="wrap_content"
-        android:text="Button" />
+        android:text="Take Survay" />
     <TextView
         android:id="@+id/txt_yesterday"
         android:layout_width="wrap_content"
@@ -113,7 +113,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:text="I felt difficult to sleep"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -124,7 +124,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:text="Early morning awakening without any reason"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/checkBox" />
@@ -135,10 +135,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:text="Awakening time to time(no continuous sleep) "
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/checkBox2" />
+    <CheckBox
+        android:id="@+id/checkBox4"
+        android:layout_below="@+id/checkBox3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:text="None of above "
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/checkBox3" />
     <Button
         android:id="@+id/button"
         android:layout_width="wrap_content"
@@ -146,7 +156,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
         android:text="submit"
-        android:layout_below="@+id/checkBox3"
+        android:layout_below="@+id/checkBox4"
          />
 
 

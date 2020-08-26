@@ -40,7 +40,7 @@ import java.util.List;
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity implements LocationListener {
-    CheckBox check1,check2,check3;
+    CheckBox check1,check2,check3,check4;
     Button buttonSubmit;
     String imei;
     LocationManager locationManager;
@@ -342,6 +342,7 @@ public void addListenerOnButtonClick(){
     check1=(CheckBox)findViewById(R.id.checkBox);
     check2=(CheckBox)findViewById(R.id.checkBox2);
     check3=(CheckBox)findViewById(R.id.checkBox3);
+    check4=(CheckBox)findViewById(R.id.checkBox4);
     buttonSubmit=(Button)findViewById(R.id.button);
 
     //Applying the Listener on the Button click
@@ -362,6 +363,10 @@ public void addListenerOnButtonClick(){
             }
             if(check3.isChecked()){
                 result.append("\nAwakening time to time");
+
+            }
+            if(check4.isChecked()){
+                result.append("\nnone of above");
 
             }
 

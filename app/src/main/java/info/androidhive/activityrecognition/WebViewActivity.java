@@ -8,10 +8,12 @@ import android.util.Log;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.TextView;
 
 
 public class WebViewActivity extends AppCompatActivity {
     WebView webView;
+    TextView imeiText;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,6 +22,7 @@ public class WebViewActivity extends AppCompatActivity {
         String imei = intent.getStringExtra("IMEI");
         Log.e("IMEI","a"+imei);
         webView = findViewById(R.id.webView);
+        imeiText = findViewById(R.id.textView2);
         String url = "https://google.com";
         WebSettings webSettings = webView.getSettings();
         webSettings.setBuiltInZoomControls(true);
@@ -28,6 +31,11 @@ public class WebViewActivity extends AppCompatActivity {
 //        browser.setWebViewClient(new MyBrowser());
         webView.setWebViewClient(new Callback());
         webView.loadUrl(url);
+
+        int lengthImei = imei.length();
+        String newImei = imei.substring(lengthImei - 4, lengthImei);
+
+        imeiText.setText(newImei);
     }
     private class Callback extends WebViewClient{  //HERE IS THE MAIN CHANGE.
 

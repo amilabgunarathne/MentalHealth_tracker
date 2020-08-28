@@ -23,7 +23,7 @@ public class WebViewActivity extends AppCompatActivity {
         Log.e("IMEI","a"+imei);
         webView = findViewById(R.id.webView);
         imeiText = findViewById(R.id.textView2);
-        String url = "https://google.com";
+        String url = "https://docs.google.com/forms/d/e/1FAIpQLSeS7WPkr2GZRp5Fon9loL71u7YCnQ3RGOyBji19KZBnzKzU0g/viewform?usp=sf_link";
         WebSettings webSettings = webView.getSettings();
         webSettings.setBuiltInZoomControls(true);
 //     webViewActivity = findViewById(R.id.webViewActivity);
